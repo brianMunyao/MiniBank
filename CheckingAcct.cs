@@ -2,7 +2,7 @@ namespace MyNamespace
 {
     class CheckingAcct : Account
     {
-
+        const decimal WITHDRAWAL_FEE = 35.0m;
         public CheckingAcct(string fn, string ln, decimal bal) : base(fn, ln, bal)
         { }
 
@@ -12,7 +12,7 @@ namespace MyNamespace
             base.Withdraw(amount);
             if (amount > base.Balance)
             {
-                base.Withdraw(35.0m);
+                base.Withdraw(WITHDRAWAL_FEE);
             }
         }
 

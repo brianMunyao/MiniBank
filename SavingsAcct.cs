@@ -2,6 +2,8 @@ namespace MyNamespace
 {
     class SavingsAcct : Account
     {
+        const int WITHDRAWAL_LIMIT = 3;
+        const decimal WITHDRAWAL_FEE = 2.0m;
         decimal _interest;
         int withdrawCount = 0;
 
@@ -21,10 +23,10 @@ namespace MyNamespace
             {
                 base.Withdraw(amount);
                 withdrawCount++;
-                if (withdrawCount == 3)
+                if (withdrawCount > WITHDRAWAL_LIMIT)
                 {
-                    Console.WriteLine("More than 3 withdrwawals - extra charge");
-                    base.Withdraw(2.0m);
+                    Console.WriteLine($"More than {WITHDRAWAL_LIMIT} withdrwawals - extra charge");
+                    base.Withdraw(WITHDRAWAL_FEE);
                 }
             }
         }
@@ -33,7 +35,6 @@ namespace MyNamespace
         {
             decimal added = _interest * base.Balance;
             base.Deposit(added);
-            withdrawCount = 0;
         }
     }
 }
